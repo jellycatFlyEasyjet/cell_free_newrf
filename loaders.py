@@ -3,9 +3,7 @@ import numpy as np
 import pandas as pd
 from typing import List
 from omegaconf import OmegaConf
-cfg = OmegaConf.load('/home/byang/BoYang/NeWRF-main/config/default.yaml')
-ap_id = cfg.environment.ap_id # [1,2,3,4]   # 1代表AP1
-
+from config_function import ap_id
 class DatasetLoader:
     def __init__(self, dataset_file) -> None:
         self.dataset = pd.read_pickle(dataset_file)
@@ -137,7 +135,7 @@ class DatasetLoader:
     def get_ap_ids(self):
         return self.dataset['TxID'].unique()
 
-    def split_train_val_test(self, train_ratio=0.8, val_ratio=0.1, seed=cfg.randomseed.dataset_seed):
+    def split_train_val_test(self, train_ratio=0.8, val_ratio=0.1, seed=12):
         '''
         Split the dataset into training, validation, and test sets.
         @param train_ratio: The ratio of the training set to the whole dataset.
