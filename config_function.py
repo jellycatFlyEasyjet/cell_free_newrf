@@ -1,6 +1,6 @@
 # 📄 保存配置到文件
 import os
-
+ap_id = [1,2]  # [1,2,3,4]   # 1代表AP1
 
 def save_config_to_file(cfg, save_dir, dataset_fname, device, base_AP, target_AP):
     """将配置参数保存到 JSON 文件中"""
@@ -15,7 +15,8 @@ def save_config_to_file(cfg, save_dir, dataset_fname, device, base_AP, target_AP
             "device": str(device),
             "base_AP": base_AP,
             "target_AP": target_AP,
-            'environment': cfg.training.args_env
+            'environment': cfg.training.args_env,
+            'ap_id': cfg.training.ap_id
         },
         "training": {
             "batch_size": cfg.training.batch_size,

@@ -1,3 +1,4 @@
+'''BoYang code Cell free network channel prediction'''
 #%%
 import matplotlib.pyplot as plt
 import torch
@@ -10,12 +11,7 @@ from omegaconf import OmegaConf
 from argparse import ArgumentParser
 import pandas as pd
 import logging
-from torch import nn
-import torch
-import numpy as np
-import numpy as np
 import time
-import numpy as np
 from models import MLP
 if not hasattr(np, 'bool8'):
     np.bool8 = np.bool_
@@ -27,17 +23,17 @@ import os
 dataset_fname = '/home/byang/BoYang/mNeWRF/dataset/conference_2000STA_4APs.pkl'
 file_dir = './ckpt/baseline/NeWRF_method'
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-
 class SimpleConfig:
     class training:
-        batch_size = 128
-        n_iters = 100000
-        display_rate = 1000
+        batch_size = 1204
+        n_iters = 10000
+        display_rate = 20
         train_split = 0.8
         val_split = 0.1
         base_AP = [1]
         target_AP = [2]
         args_env = 'office'
+        ap_id = ap_id
 
     class optimizer:
         lr = 5e-4
@@ -106,7 +102,7 @@ for i in trange(cfg.training.n_iters, desc = 'Training'):
     sta_loc = torch.tensor(loader.get_loc_batch("STA", sta_id), device=device, dtype=torch.float32)
     # AP_loc = torch.tensor(loader.get_loc_batch("AP", sta_id), device=device, dtype=torch.float32) # 多个 
 
-    input_cfr =  torch.tensor(loader.get_cfr_batch(cfg.training.base_AP, sta_id).flatten()).to(device) # 多个AP的信道
+    input_cfr =  torch.tensor(loader.get_cfr_batch(cfg.training.base_AP, sta_id)).flatten().to(device) # 多个AP的信道
     input_cfr = torch.stack([torch.real(input_cfr), torch.imag(input_cfr)], dim=-1)
     output_cfr = model(sta_loc, input_cfr)
     # output_cfr是32，2的tensor，代表着32个STA的预测的与target AP之间的channel的实部和虚部，重新组合成complex value
