@@ -1,6 +1,6 @@
 {
     "experiment_info": {
-        "timestamp": "2025-08-26 20:56:40",
+        "timestamp": "2025-09-01 13:45:04",
         "dataset_path": "/home/byang/BoYang/mNeWRF/dataset/conference_2000STA_4APs.pkl",
         "checkpoint_dir": "./ckpt/baseline/NeWRF_method",
         "device": "cuda:0",
@@ -8,7 +8,7 @@
             1
         ],
         "target_AP": [
-            2
+            1
         ],
         "environment": "office",
         "ap_id": [
@@ -17,14 +17,14 @@
         ]
     },
     "training": {
-        "batch_size": 1204,
+        "batch_size": 32,
         "n_iters": 10000,
-        "display_rate": 20,
+        "display_rate": 1000,
         "train_split": 0.8,
         "val_split": 0.1
     },
     "optimizer": {
-        "lr": 0.0005,
+        "lr": 0.001,
         "weight_decay": 0,
         "scheduler_patience": 10,
         "scheduler_factor": 0.9,
@@ -32,19 +32,19 @@
     },
     "randomseed": {
         "dataset_seed": 12,
-        "torch_seed": 13,
-        "npy_seed": 28
+        "torch_seed": 66,
+        "npy_seed": 73
     },
     "training_progress": {
-        "last_update": "2025-08-26 20:58:28",
-        "current_iteration": 140,
+        "last_update": "2025-09-01 13:45:06",
+        "current_iteration": 0,
         "total_iterations": 10000,
-        "progress_percentage": 1.4,
-        "latest_train_loss": 0.9008157253265381,
-        "latest_val_loss": 1.0877032279968262,
-        "latest_train_snr": 0.4536404105075356,
-        "latest_val_snr": -0.3651041739834452,
-        "current_learning_rate": 0.0005,
-        "checkpoint_saved": "iter_140.pt"
+        "progress_percentage": 0.0,
+        "latest_train_loss": 124752512.0,
+        "latest_val_loss": 5021924.5,
+        "latest_train_snr": -80.96049299279434,
+        "latest_val_snr": -67.0087017920927,
+        "current_learning_rate": 0.001,
+        "checkpoint_saved": "iter_0.pt"
     }
 }

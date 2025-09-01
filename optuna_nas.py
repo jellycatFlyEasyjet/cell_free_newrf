@@ -1,3 +1,5 @@
+
+#%%
 import optuna
 import torch
 import torch.nn as nn
@@ -291,7 +293,7 @@ class IntelligentPruner:
 
 class OptimizedMLP(nn.Module):
     """可配置的 MLP 模型，用于架构搜索 - 每层独立配置"""
-    def __init__(self, trial, input_dim=12):  # 默认维度改为12：STA_loc(3) + input_cfr(9)
+    def __init__(self, trial, input_dim=5):  # 默认维度改为12：STA_loc(3) + input_cfr(9)
         super(OptimizedMLP, self).__init__()
         
         # 全局架构参数
@@ -1353,7 +1355,7 @@ def load_and_test_best_model(best_params_file='final_best_params.pkl'):
     
     return model, best_params
 
-
+#%%
 if __name__ == "__main__":
     # 运行两阶段 NAS
     logging.info("🚀 开始两阶段神经架构搜索")
@@ -1387,3 +1389,5 @@ if __name__ == "__main__":
         logging.error(f"创建最佳模型失败: {e}")
         
     logging.info("✅ 两阶段 NAS 搜索完成！")
+
+# %%
